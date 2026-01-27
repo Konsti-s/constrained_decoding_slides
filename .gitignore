@@ -1,0 +1,16 @@
+# Python
+**/.venv
+**/__pycache__
+**/*.pyc
+**/wheels
+**/dist
+**/build
+**/*.egg-info
+**/.ruff_cache
+**/.ipynb_checkpoints
+**/.pytest_cache
+**/.coverage
+**/coverage.xml
+
+**/.env
+
