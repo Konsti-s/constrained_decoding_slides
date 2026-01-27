@@ -3,15 +3,12 @@ import asyncio
 from dotenv import load_dotenv
 from langchain.chat_models import BaseChatModel
 from langchain_anthropic import ChatAnthropic
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 from rich import print as rprint
 
 
 async def main():
-    loaded = load_dotenv()
-    rprint(f"[bold blue]Loaded .env:[/bold blue] {loaded}")
+    load_dotenv()
 
     class Ingredient(BaseModel):
         """Schema for a single ingredient. Make sure to give the exact quantity and name the country of origin."""
@@ -52,13 +49,9 @@ async def main():
     """
 
     models: dict[str, BaseChatModel] = {
-        # "gpt": ChatOpenAI(model="gpt-5.2"),
         "claude": ChatAnthropic(  # pyright: ignore
             model_name="claude-sonnet-4-5"
         ),
-        # "gemini": ChatGoogleGenerativeAI(
-        #     model="gemini-2.5-pro", project="mueller-inki-labeltranslator"
-        # ),
     }
 
     fc_models = {
@@ -80,7 +73,7 @@ async def main():
 
     responses = await asyncio.gather(*coros, return_exceptions=True)
 
-    for (model_name, model), response in zip(json_models.items(), responses):
+    for (model_name, _), response in zip(json_models.items(), responses):
         rprint(f"[bold green]{model_name} response:[/bold green]")
         if isinstance(response, Exception):
             rprint(f"[bold red]Error:[/bold red] {response}")

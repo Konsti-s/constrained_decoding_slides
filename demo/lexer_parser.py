@@ -148,7 +148,7 @@ class JSONParser:
         self.state = self.STATE_EXPECT_VALUE
         self.stack = [self.STACK_BOTTOM]  # ← THIS IS WHAT MAKES IT A PDA
 
-    def feed(self, terminal: tuple) -> bool:
+    def feed(self, terminal: str) -> bool:
         """
         Feed one terminal (from lexer), return True if valid, False if error.
 
