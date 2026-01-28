@@ -24,7 +24,7 @@ constrained_lark_mssql_grammar = textwrap.dedent(r"""
             sort_cols: "order_date" SP "DESC"
 
             // ---------- Entry point ----------
-            // SELECT TOP <number> <columns> FROM <table> WHERE <filter1> AND <filter2> ORDER BY <sort> ;
+            // looks like: SELECT TOP <number> <columns> FROM <table> WHERE <filter1> AND <filter2> ORDER BY <sort> ;
             start: "SELECT" SP "TOP" SP NUMBER SP select_list SP "FROM" SP table SP "WHERE" SP amount_filter SP "AND" SP date_filter SP "ORDER" SP "BY" SP sort_cols SEMI
     """)
 

@@ -73,6 +73,8 @@ response = openai.chat.completions.create(
 ## Evolution
 ### Constrained Decoding Support Today
 
+**It's fast**
+
 **It's a standard, supported by most providers**
 
 - OpenAI, Anthropic, Google Gemini, Mistral, xAI (Grok), Groq, ...

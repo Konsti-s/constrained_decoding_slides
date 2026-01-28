@@ -13,13 +13,20 @@ Always check your provider's documentation!
 --
 
 ## Practical Considerations
-### Thinking + Constraints = 🔥
+### Quality Tradeoffs
 
-Constrained decoding works with reasoning models for most "big" providers.
+Research shows constraints can degrade output quality:
 
-The constraint applies only to the **final output**, not to internal reasoning tokens.
+**The problem:**
+- Model "wants" to output token A (high probability)
+- Grammar only allows token B (low probability)
+- Forcing B may cause downstream issues
 
-The model can "think" freely, then produce guaranteed-valid JSON.
+**For JSON:** Usually fine — LLMs are heavily trained on JSON.
+
+**Edge cases:** Very unusual schemas, rare enum values, deep nesting.
+
+> Sometimes malformed JSON with correct content > valid JSON with hallucinated content. At least something breaks instead of silently failing.
 
 --
 
@@ -40,14 +47,14 @@ LLMs generate left-to-right. Schema field order affects generation:
 ```json
 // ❌ Bad: reasoning after answer
 {
-  "answer": 42,
-  "reasoning": "Because 6 × 7 = 42"
+  "score_1": 1,
+  "reasoning_1": "Because I could not find..."
 }
 
 // ✅ Good: reasoning before answer  
 {
-  "reasoning": "The question asks for 6 × 7. 6 × 7 = 42.",
-  "answer": 42
+  "reasoning_1": "Because I could not find...",
+  "score_1": 0
 }
 ```
 
@@ -56,17 +63,10 @@ Put reasoning/context fields **before** answer fields.
 --
 
 ## Practical Considerations
-### Quality Tradeoffs
+### Thinking + Constraints = 🔥
 
-Research shows constraints can degrade output quality:
+Constrained decoding works with reasoning models for most "big" providers.
 
-**The problem:**
-- Model "wants" to output token A (high probability)
-- Grammar only allows token B (low probability)
-- Forcing B may cause downstream issues
+The constraint applies only to the **final output**, not to internal reasoning tokens.
 
-**For JSON:** Usually fine — LLMs are heavily trained on JSON.
-
-**Edge cases:** Very unusual schemas, rare enum values, deep nesting.
-
-> Sometimes malformed JSON with correct content > valid JSON with hallucinated content. At least something breaks instead of silently failing.
+The model can "think" freely, then produce guaranteed-valid JSON.
