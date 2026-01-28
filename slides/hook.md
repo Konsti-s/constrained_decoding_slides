@@ -1,4 +1,5 @@
-## Constrained Decoding
+## Constrained Decoding for Structured Outputs
 
-### How to enforce the model to generate tokens according to a ruleset?
+### Getting Guaranteed JSON from LLMs
 
+> How to make LLMs produce valid, parseable structured data — every single time.
