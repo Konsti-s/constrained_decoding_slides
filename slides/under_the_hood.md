@@ -66,6 +66,11 @@ The magic is in computing that mask **fast**.
 - Problem: huge table, minutes to build for complex schemas
 - Paper: "Efficient Guided Generation for Large Language Models"
 
+**xgrammar (2024)** — Optimized for repeated schemas
+
+- Uses aggressive caching
+- Fast when same schema is reused across requests
+
 **llguidance (2025)** — Current state of the art
 - Computes valid tokens on-the-fly
 - Uses trie pruning + smart regex-like checks
