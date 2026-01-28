@@ -1,4 +1,5 @@
-## 2022: The Dark Ages
+## Evolution
+### 2022: The Dark Ages
 
 ```python
 prompt = """
@@ -19,7 +20,8 @@ except json.JSONDecodeError:
 
 --
 
-## June 2023: Function Calling
+## Evolution
+### June 2023: Function Calling
 
 ```python
 response = openai.chat.completions.create(
@@ -41,7 +43,8 @@ response = openai.chat.completions.create(
 
 --
 
-## Aug 2024: Structured Outputs
+## Evolution
+### Aug 2024: Structured Outputs
 
 ```python
 response = openai.chat.completions.create(
@@ -67,17 +70,23 @@ response = openai.chat.completions.create(
 
 --
 
-## Provider Support Today
+## Evolution
+### Constrained Decoding Support Today
 
-It's a standard, supported by:
+**It's a standard, supported by most providers**
 
-- **OpenAI**
-- **Anthropic**
-- **Google Gemini**
-- ...
+- OpenAI, Anthropic, Google Gemini, Mistral, xAI (Grok), Groq, ...
+- Langchain tries to homogenize the zoo once again with a common interface.
+- ⚠️ Schema feature support varies between providers
+- Check each provider's documentation for exact limitations.
 
-Langchain tries to homogenize the zoo once again with a common interface.
 
-⚠️ Schema feature support varies between providers
+**What about self-hosted inference engines?**
 
-Check each provider's documentation for exact limitations.
+- vLLM and SGLang (with xgrammar/llguidance backends)
+- llama.cpp (GBNF grammars)
+- Ollama (wraps llama.cpp)
+- TGI (now in maintenance mode, HuggingFace recommends vLLM/SGLang)
+
+
+

@@ -15,7 +15,7 @@ Always check your provider's documentation!
 ## Practical Considerations
 ### Thinking + Constraints = 🔥
 
-Constrained decoding works with reasoning models.
+Constrained decoding works with reasoning models for most "big" providers.
 
 The constraint applies only to the **final output**, not to internal reasoning tokens.
 

@@ -52,6 +52,7 @@ Constrained decoding is just a **mask** on the final distribution.
 - No fine-tuning required
 - No architectural changes
 - Just: "which tokens are grammatically valid here?"
+- Thats why its easy to plug on top of an llm in the inference engine of your choice.
 
 The magic is in computing that mask **fast**.
 
