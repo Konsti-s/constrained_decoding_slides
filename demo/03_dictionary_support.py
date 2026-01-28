@@ -8,6 +8,8 @@ from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 from rich import print as rprint
 
+USE_DICT = False
+
 
 async def main():
     load_dotenv()
@@ -31,6 +33,11 @@ async def main():
         ingredients: list[Ingredient] = Field(
             ..., description="A list of ingredients with their quantities. "
         )
+
+    if USE_DICT:
+        ExtractionModel = IngredientsDict
+    else:
+        ExtractionModel = IngredientsList
 
     ingredients = """
     - 100l of olive oil from Italy
@@ -64,29 +71,16 @@ async def main():
 
     fc_models = {
         f"{k}-fc": m.with_structured_output(
-            IngredientsDict, method="function_calling", include_raw=True
+            ExtractionModel, method="function_calling", include_raw=True
         )
         for k, m in models.items()
     }
     cd_models = {
         f"{k}-cd": m.with_structured_output(
-            IngredientsDict, method="json_schema", include_raw=True
+            ExtractionModel, method="json_schema", include_raw=True
         )
         for k, m in models.items()
     }
-
-    # fc_models = {
-    #     f"{k}-fc": m.with_structured_output(
-    #         IngredientsList, method="function_calling", include_raw=True
-    #     )
-    #     for k, m in models.items()
-    # }
-    # cd_models = {
-    #     f"{k}-cd": m.with_structured_output(
-    #         IngredientsList, method="json_schema", include_raw=True
-    #     )
-    #     for k, m in models.items()
-    # }
 
     json_models = {**fc_models, **cd_models}
 
